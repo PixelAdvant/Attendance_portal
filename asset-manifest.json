@@ -1,15 +1,21 @@
 {
   "files": {
     "main.css": "/Attendance_portal/static/css/main.e6c13ad2.css",
-    "main.js": "/Attendance_portal/static/js/main.c3924b28.js",
-    "static/js/453.b9796888.chunk.js": "/Attendance_portal/static/js/453.b9796888.chunk.js",
+    "main.js": "/Attendance_portal/static/js/main.e995f8f1.js",
+    "static/js/239.9353635a.chunk.js": "/Attendance_portal/static/js/239.9353635a.chunk.js",
+    "static/js/977.92be1b20.chunk.js": "/Attendance_portal/static/js/977.92be1b20.chunk.js",
+    "static/js/667.eac58b86.chunk.js": "/Attendance_portal/static/js/667.eac58b86.chunk.js",
+    "static/js/453.6e0f5a37.chunk.js": "/Attendance_portal/static/js/453.6e0f5a37.chunk.js",
     "index.html": "/Attendance_portal/index.html",
     "main.e6c13ad2.css.map": "/Attendance_portal/static/css/main.e6c13ad2.css.map",
-    "main.c3924b28.js.map": "/Attendance_portal/static/js/main.c3924b28.js.map",
-    "453.b9796888.chunk.js.map": "/Attendance_portal/static/js/453.b9796888.chunk.js.map"
+    "main.e995f8f1.js.map": "/Attendance_portal/static/js/main.e995f8f1.js.map",
+    "239.9353635a.chunk.js.map": "/Attendance_portal/static/js/239.9353635a.chunk.js.map",
+    "977.92be1b20.chunk.js.map": "/Attendance_portal/static/js/977.92be1b20.chunk.js.map",
+    "667.eac58b86.chunk.js.map": "/Attendance_portal/static/js/667.eac58b86.chunk.js.map",
+    "453.6e0f5a37.chunk.js.map": "/Attendance_portal/static/js/453.6e0f5a37.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.c3924b28.js"
+    "static/js/main.e995f8f1.js"
   ]
 }
