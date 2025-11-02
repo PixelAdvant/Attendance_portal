@@ -165,16 +165,13 @@
 // export default Attendance;
 
 import React, { useEffect, useState } from "react";
-import { Table, Button, Card, message, Tag, Row, Col } from "antd";
+import { Table, Button, Card, message, Tag } from "antd";
 import {
   getLoggedInManager,
   getLabours,
   getAttendance,
   saveAttendance,
 } from "../utils/storage";
-import * as XLSX from "xlsx";
-import jsPDF from "jspdf";
-import "jspdf-autotable";
 
 const Attendance = () => {
   const [manager, setManager] = useState(null);
@@ -326,56 +323,9 @@ const Attendance = () => {
   const totalClockedIn = todayAttendance.filter((a) => a.clockIn).length;
   const totalCompleted = todayAttendance.filter((a) => a.clockOut).length;
 
-  // 📤 Export to Excel
-  const exportToExcel = () => {
-    const worksheet = XLSX.utils.json_to_sheet(
-      todayAttendance.map((a, i) => ({
-        "S.No": i + 1,
-        "Labour Name": a.labourName,
-        "Work Type": a.workType,
-        Date: a.date,
-        "Clock In": a.clockIn || "-",
-        "Clock Out": a.clockOut || "-",
-      }))
-    );
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Attendance");
-    XLSX.writeFile(workbook, "Today_Attendance.xlsx");
-  };
-
-  // 📄 Export to PDF
-  const exportToPDF = () => {
-    const doc = new jsPDF();
-    doc.text(`Attendance Report - ${today}`, 14, 10);
-    doc.autoTable({
-      head: [["S.No", "Labour Name", "Work Type", "Clock In", "Clock Out"]],
-      body: todayAttendance.map((a, i) => [
-        i + 1,
-        a.labourName,
-        a.workType,
-        a.clockIn || "-",
-        a.clockOut || "-",
-      ]),
-      startY: 20,
-    });
-    doc.save(`Attendance_${today}.pdf`);
-  };
-
   return (
     <div style={{ padding: 20 }}>
-      <Card
-        title="Attendance Panel"
-        extra={
-          <>
-            <Button onClick={exportToExcel} style={{ marginRight: 8 }}>
-              Export Excel
-            </Button>
-            <Button type="dashed" onClick={exportToPDF}>
-              Export PDF
-            </Button>
-          </>
-        }
-      >
+      <Card title="Attendance Panel">
         <Table
           rowKey="id"
           columns={columns}
@@ -383,14 +333,12 @@ const Attendance = () => {
           pagination={false}
         />
 
-        <Row style={{ marginTop: 20 }}>
-          <Col span={12}>
-            <Card>
-              <h4>Total Clocked In Today: {totalClockedIn}</h4>
-              <h4>Total Completed Work: {totalCompleted}</h4>
-            </Card>
-          </Col>
-        </Row>
+        <div style={{ marginTop: 20 }}>
+          <Card>
+            <h4>Total Clocked In Today: {totalClockedIn}</h4>
+            <h4>Total Completed Work: {totalCompleted}</h4>
+          </Card>
+        </div>
       </Card>
     </div>
   );

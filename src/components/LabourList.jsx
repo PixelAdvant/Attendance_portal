@@ -110,9 +110,6 @@ import {
   addLabour,
   saveLabours,
 } from "../utils/storage";
-import * as XLSX from "xlsx";
-import jsPDF from "jspdf";
-import "jspdf-autotable";
 
 const LabourList = () => {
   const [manager, setManager] = useState(null);
@@ -146,31 +143,6 @@ const LabourList = () => {
     message.success("Labour deleted!");
   };
 
-  // 🧾 Export to Excel
-  const exportToExcel = () => {
-    const worksheet = XLSX.utils.json_to_sheet(
-      labours.map((l, i) => ({
-        "S.No": i + 1,
-        Name: l.name,
-        "Work Type": l.workType,
-      }))
-    );
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Labours");
-    XLSX.writeFile(workbook, "Labour_List.xlsx");
-  };
-
-  // 🧾 Export to PDF
-  const exportToPDF = () => {
-    const doc = new jsPDF();
-    doc.text("Labour List", 14, 10);
-    doc.autoTable({
-      head: [["S.No", "Name", "Work Type"]],
-      body: labours.map((l, i) => [i + 1, l.name, l.workType]),
-      startY: 20,
-    });
-    doc.save("Labour_List.pdf");
-  };
 
   const columns = [
     {
@@ -195,21 +167,12 @@ const LabourList = () => {
       <Card
         title="Labour Management"
         extra={
-          <>
-            <Button
-              type="primary"
-              style={{ marginRight: 8 }}
-              onClick={() => setIsModalVisible(true)}
-            >
-              + Add Labour
-            </Button>
-            <Button onClick={exportToExcel} style={{ marginRight: 8 }}>
-              Export Excel
-            </Button>
-            <Button onClick={exportToPDF} type="dashed">
-              Export PDF
-            </Button>
-          </>
+          <Button
+            type="primary"
+            onClick={() => setIsModalVisible(true)}
+          >
+            + Add Labour
+          </Button>
         }
       >
         <Table
