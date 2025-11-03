@@ -205,8 +205,9 @@ const Attendance = () => {
   const markAttendance = (labour, type) => {
     if (!manager) return;
 
-    const date = new Date().toLocaleDateString();
-    const time = new Date().toLocaleTimeString();
+    const now = new Date();
+    const date = now.toISOString().split('T')[0]; // YYYY-MM-DD format
+    const time = now.toLocaleTimeString();
 
     let currentAttendance = getAttendance(manager.email);
     let existing = currentAttendance.find(
@@ -262,7 +263,7 @@ const Attendance = () => {
   };
 
   const getTodayStatus = (labourId) => {
-    const today = new Date().toLocaleDateString();
+    const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
     return attendance.find((r) => r.labourId === labourId && r.date === today);
   };
 
@@ -318,7 +319,7 @@ const Attendance = () => {
   ];
 
   // 📊 Summary
-  const today = new Date().toLocaleDateString();
+  const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
   const todayAttendance = attendance.filter((a) => a.date === today);
   const totalClockedIn = todayAttendance.filter((a) => a.clockIn).length;
   const totalCompleted = todayAttendance.filter((a) => a.clockOut).length;
